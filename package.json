@@ -1,5 +1,5 @@
 {
-  "name": "amplify-react-auth-provider",
+  "name": "@ivyjk/amplify-react-auth-provider",
   "version": "1.0.0",
   "description": "React auth provider based on AWS Amplify",
   "main": "dist/index.js",
