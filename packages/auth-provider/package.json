@@ -1,6 +1,6 @@
 {
   "name": "@ivyhjk/amplify-react-auth-provider",
-  "version": "1.0.0-RC.0",
+  "version": "0.0.0",
   "description": "React provider wrapper for amplify",
   "main": "dist/index.js",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
@@ -13,13 +13,10 @@
     "url": "https://github.com/ivyhjk/amplify-react-auth-provider/issues"
   },
   "peerDependencies": {
-    "@apollo/client": "^3.3.4",
-    "react-redux": "^7.2.0",
-    "react": "^16.9.0 || ^17.0.1",
-    "redux": "^4.0.4"
+    "react": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
-    "amazon-cognito-identity-js": "^4.5.5",
+    "@ivyhjk/amplify-react-auth-provider-core": "file:../auth-provider-core",
     "aws-amplify": "^3.3.10"
   }
 }
