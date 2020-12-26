@@ -1,5 +1,5 @@
 export const Auth = {
-  currentAuthenticatedUser: (): unknown => Promise.resolve({
+  currentAuthenticatedUser: jest.fn(() => Promise.resolve({
     foo: 'bar'
-  })
+  }))
 };
