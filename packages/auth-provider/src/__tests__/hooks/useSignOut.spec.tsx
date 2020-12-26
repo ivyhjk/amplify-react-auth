@@ -1,12 +1,9 @@
 import { render, waitFor } from '@testing-library/react';
-import { Auth } from 'aws-amplify';
 import React from 'react';
 
 import { resetAuthContext } from '../../AuthContext';
 import AuthProvider from '../../AuthProvider';
 import useSignOut from '../../hooks/useSignOut';
-
-jest.mock('aws-amplify');
 
 describe('auth-provider.hooks.useSignOut', () => {
   jest.useFakeTimers();
@@ -27,11 +24,6 @@ describe('auth-provider.hooks.useSignOut', () => {
 
       return null;
     }
-
-    (Auth.currentAuthenticatedUser as jest.Mock)
-      .mockImplementation(() => Promise.resolve({
-        foo: 'bar'
-      }));
 
     render(
       <AuthProvider>
