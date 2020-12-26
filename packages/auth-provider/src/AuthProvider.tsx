@@ -1,8 +1,10 @@
-import { Auth } from 'aws-amplify';
+import {
+  AuthState,
+  currentAuthenticatedUser
+} from '@ivyhjk/amplify-react-auth-provider-core';
 import React from 'react';
 
 import { getAuthContext } from './AuthContext';
-import { AuthState } from './types';
 import { signIn, signOut } from './utils';
 
 export interface AuthProviderProps {
@@ -18,31 +20,21 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const AuthContext = getAuthContext();
 
   React.useEffect(() => {
-    setState({
-      loading: true,
-      error: undefined,
-      user: undefined
-    });
+    const callCurrentAuthenticatedUser = currentAuthenticatedUser(setState);
 
-    Auth.currentAuthenticatedUser({ bypassCache: true })
-      .then(user => setState({
-        loading: false,
-        user
-      }))
-      .catch(error => setState({
-        loading: false,
-        error
-      }));
+    callCurrentAuthenticatedUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{
-      error: state.error,
-      loading: state.loading,
-      signIn: signIn(setState),
-      signOut: signOut(setState),
-      user: state.user
-    }}>
+    <AuthContext.Provider
+      value={{
+        error: state.error,
+        loading: state.loading,
+        signIn: signIn(setState),
+        signOut: signOut(setState),
+        user: state.user
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
