@@ -1,6 +1,5 @@
+import { AuthContextFunction } from '@ivyhjk/amplify-react-auth-provider-core';
 import { Auth } from 'aws-amplify';
-
-import { AuthContextFunction } from '../types';
 
 const signOut: AuthContextFunction = (dispatch) => () => {
   dispatch({
