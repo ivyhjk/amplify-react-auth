@@ -58,7 +58,11 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@ivyhjk/amplify-react-auth-provider": "file:packages/auth-provider",
+    "@ivyhjk/amplify-react-auth-provider-core": "file:packages/auth-provider-core",
+    "@ivyhjk/amplify-social-react-auth-provider": "file:packages/social-auth-provider"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
