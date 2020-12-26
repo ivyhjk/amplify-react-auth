@@ -3,6 +3,15 @@
     "baseUrl": ".",
     "composite": true,
     "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "jsx": "react",
+    "allowJs": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -18,16 +27,5 @@
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "node"
-    ],
-    "jsx": "react"
   }
 }
