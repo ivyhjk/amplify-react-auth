@@ -7,7 +7,7 @@ import AuthProvider from '../AuthProvider';
 
 jest.mock('aws-amplify');
 
-describe('context.WinstonProvider', () => {
+describe('auth-provider.AuthProvider', () => {
   jest.useFakeTimers();
 
   it('should render children components', async () => {
