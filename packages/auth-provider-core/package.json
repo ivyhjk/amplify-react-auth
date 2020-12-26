@@ -1,0 +1,21 @@
+{
+  "name": "@ivyhjk/amplify-react-auth-provider-core",
+  "version": "0.0.0",
+  "description": "Core React provider wrapper for amplify",
+  "main": "dist/index.js",
+  "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/auth-provider-core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivyhjk/amplify-react-auth-provider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivyhjk/amplify-react-auth-provider/issues"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0 || ^17.0.1"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^4.5.5"
+  }
+}
