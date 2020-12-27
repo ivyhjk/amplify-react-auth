@@ -1,13 +1,12 @@
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-export interface AuthState {
+export type AuthCoreContextDispatcher = React.Dispatch<
+  React.SetStateAction<Omit<AuthCoreContextValue, 'dispatch'>>
+>;
+
+export interface AuthCoreContextValue {
   error?: Error;
   loading: boolean;
   user?: CognitoUser;
+  dispatch: AuthCoreContextDispatcher
 }
-
-export type AuthContextDispatcher = React.Dispatch<React.SetStateAction<AuthState>>;
-
-export type AuthContextFunction<T extends Array<unknown> = []> = (
-  dispatcher: AuthContextDispatcher
-) => (...args: T) => void;
