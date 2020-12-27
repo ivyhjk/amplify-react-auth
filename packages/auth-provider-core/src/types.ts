@@ -10,3 +10,7 @@ export interface AuthCoreContextValue {
   user?: CognitoUser;
   dispatch: AuthCoreContextDispatcher
 }
+
+export type AuthContextFunction<T extends Array<unknown> = []> = (
+  dispatcher: AuthCoreContextDispatcher
+) => (...args: T) => void;
