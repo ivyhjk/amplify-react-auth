@@ -1,7 +1,7 @@
 import {
-  AuthState,
-  currentAuthenticatedUser
-} from '@ivyhjk/amplify-react-auth-provider-core';
+  AuthCoreProvider,
+  getAuthCoreContext
+} from '@ivyhjk/amplify-react-core-auth-provider';
 import React from 'react';
 
 import { getAuthContext } from './AuthContext';
@@ -11,32 +11,28 @@ export interface AuthProviderProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-const defaultState: AuthState = {
-  loading: false
-};
-
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [state, setState] = React.useState(defaultState);
   const AuthContext = getAuthContext();
-
-  React.useEffect(() => {
-    const callCurrentAuthenticatedUser = currentAuthenticatedUser(setState);
-
-    callCurrentAuthenticatedUser();
-  }, []);
+  const AuthCoreContext = getAuthCoreContext();
 
   return (
-    <AuthContext.Provider
-      value={{
-        error: state.error,
-        loading: state.loading,
-        signIn: signIn(setState),
-        signOut: signOut(setState),
-        user: state.user
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthCoreProvider>
+      <AuthCoreContext.Consumer>
+        {({ loading, error, user, dispatch }) => (
+          <AuthContext.Provider
+            value={{
+              error,
+              loading,
+              signIn: signIn(dispatch),
+              signOut: signOut(dispatch),
+              user
+            }}
+          >
+            {children}
+          </AuthContext.Provider>
+        )}
+      </AuthCoreContext.Consumer>
+    </AuthCoreProvider>
   );
 };
 

@@ -1,18 +1,11 @@
-import {
-  currentAuthenticatedUser
-} from '@ivyhjk/amplify-react-auth-provider-core';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { getAuthContext } from '../AuthContext';
 import AuthProvider from '../AuthProvider';
 
-jest.mock('aws-amplify');
-
 describe('auth-provider.AuthProvider', () => {
-  beforeEach(async () => {
-    (currentAuthenticatedUser as jest.Mock).mockClear();
-  });
+  jest.useFakeTimers();
 
   it('should render children components', async () => {
     const rendered = render(
@@ -20,6 +13,8 @@ describe('auth-provider.AuthProvider', () => {
         <div className="unique">Test</div>
       </AuthProvider>
     );
+
+    await waitFor(jest.runOnlyPendingTimers);
 
     expect(rendered.getByText('Test')).toBeTruthy();
   });
@@ -54,6 +49,28 @@ describe('auth-provider.AuthProvider', () => {
       </AuthProvider>
     );
 
-    expect(currentAuthenticatedUser).toBeCalledTimes(1);
+    await waitFor(jest.runOnlyPendingTimers);
+
+    expect(contextSpy).toBeCalledTimes(3);
+
+    expect(contextSpy).toBeCalledWith({
+      error: undefined,
+      loading: false,
+      user: undefined
+    });
+
+    expect(contextSpy).toBeCalledWith({
+      error: undefined,
+      loading: true,
+      user: undefined
+    });
+
+    expect(contextSpy).toBeCalledWith({
+      error: undefined,
+      loading: false,
+      user: {
+        foo: 'bar'
+      }
+    });
   });
 });
