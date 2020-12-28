@@ -7,6 +7,6 @@
   "references": [
     { "path": "./packages/auth-provider" },
     { "path": "./packages/core-auth-provider" },
-    { "path": "./packages/social-auth-provider" }
+    { "path": "./packages/native-social-auth-provider" }
   ]
 }
