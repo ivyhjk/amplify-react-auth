@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "React provider wrapper for amplify",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
   "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/auth-provider#readme",
   "repository": {
@@ -16,7 +17,6 @@
     "react": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
-    "@ivyhjk/amplify-react-auth-provider-core": "file:../auth-provider-core",
-    "aws-amplify": "^3.3.10"
+    "@ivyhjk/amplify-react-auth-provider-core": "file:../auth-provider-core"
   }
 }
