@@ -7,11 +7,7 @@ import React from 'react';
 import { getAuthContext } from './AuthContext';
 import { signIn, signOut } from './utils';
 
-export interface AuthProviderProps {
-  children: React.ReactNode | React.ReactNode[];
-}
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: React.FC = ({ children }) => {
   const AuthContext = getAuthContext();
   const AuthCoreContext = getAuthCoreContext();
 
