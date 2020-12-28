@@ -17,6 +17,6 @@
     "react": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
-    "@ivyhjk/amplify-react-auth-provider-core": "file:../auth-provider-core"
+    "@ivyhjk/amplify-react-core-auth-provider": "file:../core-auth-provider"
   }
 }

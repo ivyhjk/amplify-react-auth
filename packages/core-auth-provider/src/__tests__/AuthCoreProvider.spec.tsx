@@ -7,7 +7,7 @@ import AuthCoreProvider from '../AuthCoreProvider';
 
 jest.mock('aws-amplify');
 
-describe('auth-provider-core.AuthCoreProvider', () => {
+describe('core-auth-provider.AuthCoreProvider', () => {
   jest.useFakeTimers();
 
   beforeEach(async () => {

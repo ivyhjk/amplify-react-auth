@@ -6,7 +6,7 @@
   "include": [],
   "references": [
     { "path": "./packages/auth-provider" },
-    { "path": "./packages/auth-provider-core" },
+    { "path": "./packages/core-auth-provider" },
     { "path": "./packages/social-auth-provider" }
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "name": "@ivyhjk/amplify-react-auth-provider-core",
+  "name": "@ivyhjk/amplify-react-core-auth-provider",
   "version": "0.0.0",
   "description": "Core React provider wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
-  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/auth-provider-core#readme",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/core-auth-provider#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ivyhjk/amplify-react-auth-provider.git"

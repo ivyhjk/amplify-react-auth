@@ -9,6 +9,6 @@
   ],
   "exclude": ["**/__tests__"],
   "references": [
-    { "path": "../auth-provider-core" }
+    { "path": "../core-auth-provider" }
   ]
 }

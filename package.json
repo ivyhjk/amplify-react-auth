@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@ivyhjk/amplify-react-auth-provider": "file:packages/auth-provider",
-    "@ivyhjk/amplify-react-auth-provider-core": "file:packages/auth-provider-core",
+    "@ivyhjk/amplify-react-core-auth-provider": "file:packages/core-auth-provider",
     "@ivyhjk/amplify-social-react-auth-provider": "file:packages/social-auth-provider"
   },
   "husky": {
