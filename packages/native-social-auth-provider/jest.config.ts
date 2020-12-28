@@ -4,6 +4,7 @@ import baseConfig from '../../jest.config.base';
 
 const config: Config.InitialOptions = {
   ...baseConfig
+  // testEnvironment: 'node'
 };
 
 export default config;

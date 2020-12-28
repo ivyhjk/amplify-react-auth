@@ -1,11 +1,11 @@
 {
-  "name": "@ivyhjk/amplify-react-social-auth-provider",
+  "name": "@ivyhjk/amplify-react-native-social-auth-provider",
   "version": "0.0.0",
   "description": "React provider wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
-  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/social-auth-provider#readme",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/native-social-auth-provider#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ivyhjk/amplify-react-auth-provider.git"
@@ -14,9 +14,11 @@
     "url": "https://github.com/ivyhjk/amplify-react-auth-provider/issues"
   },
   "peerDependencies": {
-    "react": "^16.9.0 || ^17.0.1"
+    "react": "^16.9.0 || ^17.0.1",
+    "react-native": "^0.63.4"
   },
   "dependencies": {
-    "@ivyhjk/amplify-react-core-auth-provider": "file:../core-auth-provider"
+    "@ivyhjk/amplify-react-core-auth-provider": "file:../core-auth-provider",
+    "@react-native-community/google-signin": "^5.0.0"
   }
 }

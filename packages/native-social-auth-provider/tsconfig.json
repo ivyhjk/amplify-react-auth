@@ -2,14 +2,15 @@
   "extends": "../../tsconfig.base",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "jsx": "react-native",
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*"
   ],
   "exclude": ["**/__tests__"],
   "references": [
-    { "path": "../auth-provider" },
     { "path": "../core-auth-provider" }
   ]
 }
