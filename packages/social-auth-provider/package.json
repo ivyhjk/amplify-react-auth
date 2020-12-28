@@ -1,0 +1,22 @@
+{
+  "name": "@ivyhjk/amplify-react-social-auth-provider",
+  "version": "0.0.0",
+  "description": "React provider wrapper for amplify",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/social-auth-provider#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivyhjk/amplify-react-auth-provider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivyhjk/amplify-react-auth-provider/issues"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0 || ^17.0.1"
+  },
+  "dependencies": {
+    "@ivyhjk/amplify-react-core-auth-provider": "file:../core-auth-provider"
+  }
+}
