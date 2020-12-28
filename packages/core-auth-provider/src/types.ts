@@ -13,4 +13,4 @@ export interface AuthCoreContextValue {
 
 export type AuthContextFunction<T extends Array<unknown> = []> = (
   dispatcher: AuthCoreContextDispatcher
-) => (...args: T) => void;
+) => (...args: T) => (void | Promise<void>);
