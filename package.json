@@ -1,8 +1,6 @@
 {
   "name": "@ivyjk/amplify-react-auth-provider",
-  "version": "1.0.0",
   "description": "React auth provider based on AWS Amplify",
-  "main": "dist/index.js",
   "scripts": {
     "clean": "git clean -dfqX -- ./node_modules **/dist/ **/node_modules/ **/tsconfig*tsbuildinfo",
     "compile": "tsc --build tsconfig.build.json",
