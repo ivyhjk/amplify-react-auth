@@ -1,7 +1,7 @@
 {
   "name": "@ivyhjk/amplify-react-native-social-auth-provider",
   "version": "0.0.1-next.0",
-  "description": "React provider wrapper for amplify",
+  "description": "React Native social authentication provider wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
