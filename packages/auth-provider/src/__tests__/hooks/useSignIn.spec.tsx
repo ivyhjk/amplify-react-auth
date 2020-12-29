@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { resetAuthContext } from '../../AuthContext';
@@ -6,6 +6,8 @@ import AuthProvider from '../../AuthProvider';
 import useSignIn from '../../hooks/useSignIn';
 
 describe('auth-provider.hooks.useSignIn', () => {
+  jest.useFakeTimers();
+
   afterEach(() => {
     resetAuthContext();
   });
@@ -29,12 +31,28 @@ describe('auth-provider.hooks.useSignIn', () => {
       </AuthProvider>
     );
 
-    expect(statesSpy).toBeCalledTimes(1);
+    await waitFor(jest.runOnlyPendingTimers);
+
+    expect(statesSpy).toBeCalledTimes(3);
 
     expect(statesSpy).toBeCalledWith({
       error: undefined,
       loading: false,
       user: undefined
+    });
+
+    expect(statesSpy).toBeCalledWith({
+      error: undefined,
+      loading: true,
+      user: undefined
+    });
+
+    expect(statesSpy).toBeCalledWith({
+      error: undefined,
+      loading: false,
+      user: {
+        foo: 'bar'
+      }
     });
   });
 });
