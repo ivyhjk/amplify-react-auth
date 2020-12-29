@@ -4,6 +4,7 @@
   "description": "React authentication provider wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
   "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/auth-provider#readme",
   "license": "MIT",
@@ -15,6 +16,7 @@
     "url": "https://github.com/ivyhjk/amplify-react-auth-provider/issues"
   },
   "peerDependencies": {
+    "aws-amplify": "^3.3.13",
     "react": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
