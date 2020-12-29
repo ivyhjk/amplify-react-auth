@@ -1,22 +1,14 @@
-# React Amplify authentication provider
+# React Amplify authentication providers
 
-React authentication provider based on top of AWS Amplify
+React authentication providers based on top of AWS Amplify
 
 ## Install
 
-with NPM:
-
 ```bash
-npm install @ivyhjk/amplify-react-auth-provider
+npm install
 ```
 
-with yarn:
-
-```bash
-yarn add @ivyhjk/amplify-react-auth-provider
-```
-
-### Testing
+## Testing
 
 ```bash
 npm run test
