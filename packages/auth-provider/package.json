@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
   "homepage": "https://github.com/ivyhjk/amplify-react-auth-provider/tree/master/packages/auth-provider#readme",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ivyhjk/amplify-react-auth-provider.git"
