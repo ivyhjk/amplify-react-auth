@@ -4,31 +4,36 @@ import {
 } from '@ivyhjk/amplify-react-core-auth-provider';
 import React from 'react';
 
+import { useGoogleSignIn, useGoogleSignOut } from './hooks';
 import { getSocialAuthContext } from './SocialAuthContext';
-import googleSignIn from './utils/googleSignIn';
-import googleSignOut from './utils/googleSignOut';
 
-const SocialAuthProvider: React.FC = ({ children }) => {
-  const AuthCoreContext = getAuthCoreContext();
+const SocialAuthContextProvider: React.FC = ({ children }) => {
   const SocialAuthContext = getSocialAuthContext();
+  const { error, loading, user } = React.useContext(getAuthCoreContext());
+  const [googleSignIn] = useGoogleSignIn();
+  const [googleSignOut] = useGoogleSignOut();
 
   return (
+    <SocialAuthContext.Provider
+      value={{
+        error,
+        loading,
+        googleSignIn,
+        googleSignOut,
+        user
+      }}
+    >
+      {children}
+    </SocialAuthContext.Provider>
+  );
+};
+
+const SocialAuthProvider: React.FC = ({ children }) => {
+  return (
     <AuthCoreProvider>
-      <AuthCoreContext.Consumer>
-        {({ loading, error, user, dispatch }) => (
-          <SocialAuthContext.Provider
-            value={{
-              error,
-              loading,
-              googleSignIn: googleSignIn(dispatch),
-              googleSignOut: googleSignOut(dispatch),
-              user
-            }}
-          >
-            {children}
-          </SocialAuthContext.Provider>
-        )}
-      </AuthCoreContext.Consumer>
+      <SocialAuthContextProvider>
+        {children}
+      </SocialAuthContextProvider>
     </AuthCoreProvider>
   );
 };
