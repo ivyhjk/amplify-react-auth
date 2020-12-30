@@ -4,6 +4,7 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "jsx": "react-native",
+    "module": "esnext",
     "skipLibCheck": true
   },
   "include": [
