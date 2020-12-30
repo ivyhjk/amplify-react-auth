@@ -1,4 +1,8 @@
+import {
+  GoogleSignin
+} from '@react-native-community/google-signin';
 import { render, waitFor } from '@testing-library/react-native';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
 import useGoogleSignOut from '../../hooks/useGoogleSignOut';
@@ -6,20 +10,25 @@ import { resetSocialAuthContext } from '../../SocialAuthContext';
 import SocialAuthProvider from '../../SocialAuthProvider';
 import flushPromises from '../flushPromises';
 
+jest.mock('aws-amplify');
+
 describe('social-auth-provider.hooks.useGoogleSignOut', () => {
-  afterEach(() => {
+  beforeEach(async () => {
     resetSocialAuthContext();
+
+    (GoogleSignin.signOut as jest.Mock).mockClear();
+    (Auth.signOut as jest.Mock).mockClear();
   });
 
-  it('should return a valid state from the context if available', async () => {
-    const statesSpy = jest.fn();
-
+  const doRender = (statesSpy: jest.Mock) => {
     function App () {
       const [doSignOut, state] = useGoogleSignOut();
 
       statesSpy(state);
 
-      expect(doSignOut).toBeTruthy();
+      React.useEffect(() => {
+        doSignOut();
+      }, [doSignOut]);
 
       return null;
     }
@@ -29,8 +38,27 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
         <App />
       </SocialAuthProvider>
     );
+  };
+
+  it('should dispatch a successful sign out', async () => {
+    (GoogleSignin.signOut as jest.Mock)
+      .mockImplementation(() => Promise.resolve());
+
+    (Auth.signOut as jest.Mock)
+      .mockImplementation(() => Promise.resolve());
+
+    const statesSpy = jest.fn();
+
+    doRender(statesSpy);
 
     await waitFor(flushPromises);
+
+    expect(GoogleSignin.signOut).toBeCalledTimes(1);
+
+    expect(Auth.signOut).toBeCalledTimes(1);
+    expect(Auth.signOut).toBeCalledWith({
+      global: true
+    });
 
     expect(statesSpy).toBeCalledTimes(3);
 
@@ -42,16 +70,46 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
     expect(statesSpy).toBeCalledWith({
       error: undefined,
-      loading: true,
-      user: undefined
+      loading: true
     });
 
     expect(statesSpy).toBeCalledWith({
       error: undefined,
       loading: false,
-      user: {
-        foo: 'bar'
-      }
+      user: undefined
+    });
+  });
+
+  it('should dispatch a failed sign out', async () => {
+    (GoogleSignin.signOut as jest.Mock)
+      .mockImplementation(() => Promise.reject(new Error('oops!')));
+
+    const statesSpy = jest.fn();
+
+    doRender(statesSpy);
+
+    await waitFor(flushPromises);
+
+    expect(GoogleSignin.signOut).toBeCalledTimes(1);
+
+    expect(Auth.signOut).not.toBeCalled();
+
+    expect(statesSpy).toBeCalledTimes(3);
+
+    expect(statesSpy).toBeCalledWith({
+      error: undefined,
+      loading: false,
+      user: undefined
+    });
+
+    expect(statesSpy).toBeCalledWith({
+      error: undefined,
+      loading: true
+    });
+
+    expect(statesSpy).toBeCalledWith({
+      error: new Error('oops!'),
+      loading: false
     });
   });
 });
