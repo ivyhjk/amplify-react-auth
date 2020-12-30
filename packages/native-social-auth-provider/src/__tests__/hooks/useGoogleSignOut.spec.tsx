@@ -62,18 +62,18 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
     expect(statesSpy).toBeCalledTimes(3);
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(1, {
       error: undefined,
       loading: false,
       user: undefined
     });
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true
     });
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(3, {
       error: undefined,
       loading: false,
       user: undefined
@@ -96,18 +96,18 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
     expect(statesSpy).toBeCalledTimes(3);
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(1, {
       error: undefined,
       loading: false,
       user: undefined
     });
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true
     });
 
-    expect(statesSpy).toBeCalledWith({
+    expect(statesSpy).toHaveBeenNthCalledWith(3, {
       error: new Error('oops!'),
       loading: false
     });
