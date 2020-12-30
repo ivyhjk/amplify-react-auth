@@ -20,8 +20,6 @@ describe('auth-provider.AuthProvider', () => {
   });
 
   it('should update props when the state changes', async () => {
-    const contextSpy = jest.fn();
-
     const TestChild = () => {
       const {
         error,
@@ -31,14 +29,12 @@ describe('auth-provider.AuthProvider', () => {
         user
       } = React.useContext(getAuthContext());
 
-      contextSpy({
-        error,
-        loading,
-        user
-      });
+      expect(error).toBeUndefined();
+      expect(loading).toBe(false);
+      expect(user).toBeUndefined();
 
-      expect(signIn).toBeTruthy();
-      expect(signOut).toBeTruthy();
+      expect(signIn).toBeInstanceOf(Function);
+      expect(signOut).toBeInstanceOf(Function);
 
       return null;
     };
@@ -51,26 +47,6 @@ describe('auth-provider.AuthProvider', () => {
 
     await waitFor(jest.runOnlyPendingTimers);
 
-    expect(contextSpy).toBeCalledTimes(3);
-
-    expect(contextSpy).toBeCalledWith({
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(contextSpy).toBeCalledWith({
-      error: undefined,
-      loading: true,
-      user: undefined
-    });
-
-    expect(contextSpy).toBeCalledWith({
-      error: undefined,
-      loading: false,
-      user: {
-        foo: 'bar'
-      }
-    });
+    expect.hasAssertions();
   });
 });
