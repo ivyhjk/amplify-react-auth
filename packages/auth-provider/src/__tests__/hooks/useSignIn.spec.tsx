@@ -28,7 +28,7 @@ describe('auth-provider.hooks.useSignIn', () => {
       statesSpy(state);
 
       React.useEffect(() => {
-        doSignIn('foo', 'bar');
+        doSignIn('theUsername', 'thePassword');
       }, [doSignIn]);
 
       return null;
@@ -41,6 +41,12 @@ describe('auth-provider.hooks.useSignIn', () => {
     );
 
     await waitFor(jest.runOnlyPendingTimers);
+
+    expect(Auth.signIn).toBeCalledTimes(1);
+    expect(Auth.signIn).toBeCalledWith({
+      username: 'theUsername',
+      password: 'thePassword'
+    });
 
     expect(statesSpy).toBeCalledTimes(3);
 
