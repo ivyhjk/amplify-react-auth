@@ -1,18 +1,43 @@
+import {
+  BaseAuthCoreContextValue,
+  getAuthCoreContext
+} from '@ivyhjk/amplify-react-core-auth-provider';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import { getAuthContext } from '../AuthContext';
 import { AuthContextValue } from '../types';
 
 type UseSignInState = [
   AuthContextValue['signIn'],
-  Omit<AuthContextValue, 'signOut' | 'signIn'>
+  BaseAuthCoreContextValue
 ];
 
 export default function useSignIn (): UseSignInState {
-  const { error, loading, signIn, user } = React.useContext(getAuthContext());
+  const { error, loading, user, dispatch } = React.useContext(getAuthCoreContext());
+
+  const doSignIn = React.useCallback((username: string, password: string) => {
+    dispatch({
+      error: undefined,
+      loading: true,
+      user: undefined
+    });
+
+    Auth.signIn({
+      password,
+      username
+    })
+      .then((data) => dispatch({
+        loading: false,
+        user: data
+      }))
+      .catch((error) => dispatch({
+        error,
+        loading: false
+      }));
+  }, [dispatch]);
 
   return [
-    signIn,
+    doSignIn,
     {
       error,
       loading,

@@ -1,25 +1,13 @@
 import { render, waitFor } from '@testing-library/react';
-import { Auth } from 'aws-amplify';
 import React from 'react';
 
 import { getAuthCoreContext } from '../AuthCoreContext';
 import AuthCoreProvider from '../AuthCoreProvider';
 
-jest.mock('aws-amplify');
-
 describe('core-auth-provider.AuthCoreProvider', () => {
   jest.useFakeTimers();
 
-  beforeEach(async () => {
-    (Auth.currentAuthenticatedUser as jest.Mock).mockClear();
-  });
-
   it('should render children components', async () => {
-    (Auth.currentAuthenticatedUser as jest.Mock)
-      .mockImplementation(() => Promise.resolve({
-        foo: 'bar'
-      }));
-
     const rendered = render(
       <AuthCoreProvider>
         <div className="unique">Test</div>
@@ -32,15 +20,11 @@ describe('core-auth-provider.AuthCoreProvider', () => {
   });
 
   it('should update props when the state changes', async () => {
-    (Auth.currentAuthenticatedUser as jest.Mock)
-      .mockImplementation(() => Promise.resolve({
-        foo: 'bar'
-      }));
-
     const contextSpy = jest.fn();
 
     const TestChild = () => {
       const {
+        dispatch,
         error,
         loading,
         user
@@ -51,6 +35,12 @@ describe('core-auth-provider.AuthCoreProvider', () => {
         loading,
         user
       });
+
+      React.useEffect(() => {
+        dispatch({
+          loading: true
+        });
+      }, [dispatch]);
 
       return null;
     };
@@ -63,9 +53,7 @@ describe('core-auth-provider.AuthCoreProvider', () => {
 
     await waitFor(jest.runOnlyPendingTimers);
 
-    expect(Auth.currentAuthenticatedUser).toBeCalledTimes(1);
-
-    expect(contextSpy).toBeCalledTimes(3);
+    expect(contextSpy).toBeCalledTimes(2);
     expect(contextSpy).toBeCalledWith({
       error: undefined,
       loading: false,
@@ -75,13 +63,6 @@ describe('core-auth-provider.AuthCoreProvider', () => {
       error: undefined,
       loading: true,
       user: undefined
-    });
-    expect(contextSpy).toBeCalledWith({
-      error: undefined,
-      loading: false,
-      user: {
-        foo: 'bar'
-      }
     });
   });
 });

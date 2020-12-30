@@ -5,29 +5,35 @@ import {
 import React from 'react';
 
 import { getAuthContext } from './AuthContext';
-import { signIn, signOut } from './utils';
+import { useSignIn, useSignOut } from './hooks';
 
-const AuthProvider: React.FC = ({ children }) => {
+const AuthContextProvider: React.FC = ({ children }) => {
   const AuthContext = getAuthContext();
-  const AuthCoreContext = getAuthCoreContext();
+  const { error, loading, user } = React.useContext(getAuthCoreContext());
+  const [signIn] = useSignIn();
+  const [signOut] = useSignOut();
 
   return (
+    <AuthContext.Provider
+      value={{
+        error,
+        loading,
+        signIn,
+        signOut,
+        user
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const AuthProvider: React.FC = ({ children }) => {
+  return (
     <AuthCoreProvider>
-      <AuthCoreContext.Consumer>
-        {({ loading, error, user, dispatch }) => (
-          <AuthContext.Provider
-            value={{
-              error,
-              loading,
-              signIn: signIn(dispatch),
-              signOut: signOut(dispatch),
-              user
-            }}
-          >
-            {children}
-          </AuthContext.Provider>
-        )}
-      </AuthCoreContext.Consumer>
+      <AuthContextProvider>
+        {children}
+      </AuthContextProvider>
     </AuthCoreProvider>
   );
 };
