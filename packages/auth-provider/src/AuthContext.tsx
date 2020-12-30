@@ -1,3 +1,4 @@
+import { resetAuthCoreContext } from '@ivyhjk/amplify-react-core-auth-provider';
 import React from 'react';
 
 import { AuthContextValue } from './types';
@@ -16,6 +17,8 @@ const contextSymbol = typeof Symbol === 'function' && Symbol.for
   : '__AUTH_CONTEXT__';
 
 export function resetAuthContext (): void {
+  resetAuthCoreContext();
+
   Object.defineProperty(React, contextSymbol, {
     configurable: true,
     enumerable: false,
