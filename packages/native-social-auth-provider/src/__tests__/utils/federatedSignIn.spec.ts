@@ -2,6 +2,8 @@ import { Auth } from 'aws-amplify';
 
 import federatedSignIn from '../../utils/federatedSignIn';
 
+jest.mock('aws-amplify');
+
 describe('social-auth-provider.utils.federatedSignIn', () => {
   beforeEach(async () => {
     (Auth.federatedSignIn as jest.Mock).mockClear();
@@ -9,6 +11,11 @@ describe('social-auth-provider.utils.federatedSignIn', () => {
   });
 
   it('sign in successfully', async () => {
+    (Auth.currentAuthenticatedUser as jest.Mock)
+      .mockImplementation(() => Promise.resolve({
+        foo: 'bar'
+      }));
+
     const response = await federatedSignIn(
       'google',
       'theToken',
