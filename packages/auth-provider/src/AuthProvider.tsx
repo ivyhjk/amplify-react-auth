@@ -9,22 +9,26 @@ import { useSignIn, useSignOut } from './hooks';
 
 const AuthContextProvider: React.FC = ({ children }) => {
   const AuthContext = getAuthContext();
-  const { error, loading, user } = React.useContext(getAuthCoreContext());
+  const CoreAuthContext = getAuthCoreContext();
   const [signIn] = useSignIn();
   const [signOut] = useSignOut();
 
   return (
-    <AuthContext.Provider
-      value={{
-        error,
-        loading,
-        signIn,
-        signOut,
-        user
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <CoreAuthContext.Consumer>
+      {({ error, loading, user }) => (
+        <AuthContext.Provider
+          value={{
+            error,
+            loading,
+            signIn,
+            signOut,
+            user
+          }}
+        >
+          {children}
+        </AuthContext.Provider>
+      )}
+    </CoreAuthContext.Consumer>
   );
 };
 
