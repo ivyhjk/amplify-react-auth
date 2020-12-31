@@ -11,7 +11,7 @@ jest.mock('aws-amplify');
 describe('auth-provider.hooks.useSignOut', () => {
   jest.useFakeTimers();
 
-  afterEach(() => {
+  beforeEach(() => {
     resetAuthContext();
   });
 
