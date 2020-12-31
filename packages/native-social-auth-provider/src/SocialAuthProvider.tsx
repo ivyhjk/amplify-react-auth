@@ -9,22 +9,26 @@ import { getSocialAuthContext } from './SocialAuthContext';
 
 const SocialAuthContextProvider: React.FC = ({ children }) => {
   const SocialAuthContext = getSocialAuthContext();
-  const { error, loading, user } = React.useContext(getAuthCoreContext());
+  const CoreAuthContext = getAuthCoreContext();
   const [googleSignIn] = useGoogleSignIn();
   const [googleSignOut] = useGoogleSignOut();
 
   return (
-    <SocialAuthContext.Provider
-      value={{
-        error,
-        loading,
-        googleSignIn,
-        googleSignOut,
-        user
-      }}
-    >
-      {children}
-    </SocialAuthContext.Provider>
+    <CoreAuthContext.Consumer>
+      {({ error, loading, user }) => (
+        <SocialAuthContext.Provider
+          value={{
+            error,
+            loading,
+            googleSignIn,
+            googleSignOut,
+            user
+          }}
+        >
+          {children}
+        </SocialAuthContext.Provider>
+      )}
+    </CoreAuthContext.Consumer>
   );
 };
 
