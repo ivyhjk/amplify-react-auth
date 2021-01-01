@@ -1,5 +1,5 @@
 {
-  "name": "@ivyhjk/amplify-react-native-social-auth",
+  "name": "@ivyhjk/amplify-react-native-social",
   "version": "1.0.0-next.0",
   "description": "React Native social authentication wrapper for amplify",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "dist"
   ],
   "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
-  "homepage": "https://github.com/ivyhjk/amplify-react-auth/tree/master/packages/native-social-auth#readme",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth/tree/master/packages/native-social#readme",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -66,7 +66,7 @@
     "@ivyhjk/amplify-react-auth": "file:packages/auth",
     "@ivyhjk/amplify-react-core-auth": "file:packages/core-auth",
     "@ivyhjk/amplify-react-federated-auth": "file:packages/federated-auth",
-    "@ivyhjk/amplify-react-native-social-auth-provider": "file:packages/native-social-auth-provider"
+    "@ivyhjk/amplify-react-native-social": "file:packages/native-social-auth"
   },
   "husky": {
     "hooks": {
