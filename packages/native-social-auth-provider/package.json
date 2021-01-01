@@ -1,6 +1,6 @@
 {
   "name": "@ivyhjk/amplify-react-native-social-auth-provider",
-  "version": "0.0.1-next.7",
+  "version": "0.0.1-next.8",
   "description": "React Native social authentication provider wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
