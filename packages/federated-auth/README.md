@@ -15,13 +15,3 @@ with yarn:
 ```bash
 yarn add @ivyhjk/amplify-react-federated-auth
 ```
-
-## Usage
-
-```tsx
-const App: React.Fc = () => (
-  <AuthCoreContext>
-    {/* ... */}
-  </AuthCoreContext>
-);
-```

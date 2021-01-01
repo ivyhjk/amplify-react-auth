@@ -5,7 +5,7 @@ React authentication providers based on top of AWS Amplify
 ## Available authentications
 
 - [Amplify authentication (auth)](packages/auth)
-- [Amplify federated authentication (auth)](packages/federated-auth)
+- [Amplify federated authentication](packages/federated-auth)
 - [React Native sociak authentication (just Google, for now)](packages/native-social-auth)
 
 ### Install
