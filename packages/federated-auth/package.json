@@ -1,0 +1,24 @@
+{
+  "name": "@ivyhjk/amplify-react-federated-auth",
+  "version": "1.0.0-next.0",
+  "description": "Federated React authentication wrapper for amplify",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Elvis Munoz <elvis.munoz.f@gmail.com>",
+  "homepage": "https://github.com/ivyhjk/amplify-react-auth/tree/master/packages/federated-auth#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivyhjk/amplify-react-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivyhjk/amplify-react-auth/issues"
+  },
+  "peerDependencies": {
+    "aws-amplify": "^3.3.13",
+    "react": "^16.9.0 || ^17.0.1"
+  }
+}
