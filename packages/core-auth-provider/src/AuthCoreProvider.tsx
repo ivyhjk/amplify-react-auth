@@ -3,13 +3,19 @@ import React from 'react';
 import { getAuthCoreContext } from './AuthCoreContext';
 import { BaseAuthCoreContextValue } from './types';
 
-const defaultState: BaseAuthCoreContextValue = {
+const defaultState = {
   loading: false
 };
 
-const AuthCoreProvider: React.FC = ({ children }) => {
-  const [state, setState] = React.useState(defaultState);
-  const AuthCoreContext = getAuthCoreContext();
+interface AuthCoreProviderProps {
+  children: React.ReactNode
+}
+
+export default function AuthCoreProvider<TUser> ({
+  children
+}: AuthCoreProviderProps): React.ReactElement<AuthCoreProviderProps> {
+  const [state, setState] = React.useState<BaseAuthCoreContextValue<TUser>>(defaultState);
+  const AuthCoreContext = getAuthCoreContext<TUser>();
 
   return (
     <AuthCoreContext.Provider
@@ -23,6 +29,4 @@ const AuthCoreProvider: React.FC = ({ children }) => {
       {children}
     </AuthCoreContext.Provider>
   );
-};
-
-export default AuthCoreProvider;
+}

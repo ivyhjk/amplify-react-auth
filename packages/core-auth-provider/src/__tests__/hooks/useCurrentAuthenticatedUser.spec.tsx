@@ -7,7 +7,7 @@ import useCurrentAuthenticatedUser from '../../hooks/useCurrentAuthenticatedUser
 
 jest.mock('aws-amplify');
 
-describe('social-auth-provider.hooks.useCurrentAuthenticatedUser', () => {
+describe('core-auth.hooks.useCurrentAuthenticatedUser', () => {
   jest.useFakeTimers();
 
   it('should return a valid state from the context if available', async () => {

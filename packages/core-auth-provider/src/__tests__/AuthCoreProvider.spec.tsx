@@ -4,7 +4,7 @@ import React from 'react';
 import { getAuthCoreContext } from '../AuthCoreContext';
 import AuthCoreProvider from '../AuthCoreProvider';
 
-describe('core-auth-provider.AuthCoreProvider', () => {
+describe('core-auth.AuthCoreProvider', () => {
   jest.useFakeTimers();
 
   it('should render children components', async () => {

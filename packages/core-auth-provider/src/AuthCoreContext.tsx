@@ -15,11 +15,11 @@ const contextSymbol = typeof Symbol === 'function' && Symbol.for
   ? Symbol.for('__AUTH_CORE_CONTEXT__')
   : '__AUTH_CORE_CONTEXT__';
 
-export function resetAuthCoreContext (): void {
+export function resetAuthCoreContext<TUser> (): void {
   Object.defineProperty(React, contextSymbol, {
     configurable: true,
     enumerable: false,
-    value: React.createContext<AuthCoreContextValue>({
+    value: React.createContext<AuthCoreContextValue<TUser>>({
       error: undefined,
       loading: false,
       user: undefined,
@@ -29,12 +29,14 @@ export function resetAuthCoreContext (): void {
   });
 }
 
-export function getAuthCoreContext (): React.Context<AuthCoreContextValue> {
+export function getAuthCoreContext<TUser> (
+
+): React.Context<AuthCoreContextValue<TUser>> {
   if (!(React as Record<string, unknown>)[contextSymbol as string]) {
     resetAuthCoreContext();
   }
 
   return (
     React as Record<string, unknown>
-  )[contextSymbol as string] as React.Context<AuthCoreContextValue>;
+  )[contextSymbol as string] as React.Context<AuthCoreContextValue<TUser>>;
 }

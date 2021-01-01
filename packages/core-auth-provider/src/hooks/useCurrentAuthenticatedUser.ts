@@ -4,15 +4,15 @@ import React from 'react';
 import { getAuthCoreContext } from '../AuthCoreContext';
 import { BaseAuthCoreContextValue } from '../types';
 
-export default function useCurrentAuthenticatedUser (
+export default function useCurrentAuthenticatedUser<TUser> (
 
-): BaseAuthCoreContextValue {
+): BaseAuthCoreContextValue<TUser> {
   const {
     error,
     loading,
     user,
     dispatch
-  } = React.useContext(getAuthCoreContext());
+  } = React.useContext(getAuthCoreContext<TUser>());
 
   React.useEffect(() => {
     dispatch({
