@@ -1,4 +1,5 @@
-export * from '@ivyhjk/amplify-react-core-auth-provider';
+export * from '@ivyhjk/amplify-react-core-auth';
+export * from '@ivyhjk/amplify-react-federated-auth';
 
 export { default as SocialAuthProvider } from './SocialAuthProvider';
 

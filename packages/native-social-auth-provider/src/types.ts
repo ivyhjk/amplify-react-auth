@@ -1,6 +1,8 @@
-import { AuthCoreContextValue } from '@ivyhjk/amplify-react-core-auth-provider';
+import { CoreAuthContextValue } from '@ivyhjk/amplify-react-core-auth';
+import { FederatedUser } from '@ivyhjk/amplify-react-federated-auth';
 
-export interface SocialAuthContextValue extends Omit<AuthCoreContextValue, 'dispatch'> {
+export interface SocialAuthContextValue<TUser extends FederatedUser = FederatedUser> extends
+  Omit<CoreAuthContextValue<TUser>, 'dispatch'> {
   googleSignIn: () => void;
   googleSignOut: () => void;
 }

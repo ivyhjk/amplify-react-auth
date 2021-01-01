@@ -1,7 +1,8 @@
 import {
-  BaseAuthCoreContextValue,
-  getAuthCoreContext
-} from '@ivyhjk/amplify-react-core-auth-provider';
+  BaseCoreAuthContextValue,
+  getCoreAuthContext
+} from '@ivyhjk/amplify-react-core-auth';
+import { FederatedUser } from '@ivyhjk/amplify-react-federated-auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { Auth } from 'aws-amplify';
 import React from 'react';
@@ -10,11 +11,11 @@ import { SocialAuthContextValue } from '../types';
 
 type UseSignOutTuple = [
   SocialAuthContextValue['googleSignOut'],
-  BaseAuthCoreContextValue
+  BaseCoreAuthContextValue<FederatedUser>
 ];
 
 export default function useGoogleSignOut (): UseSignOutTuple {
-  const { error, loading, user, dispatch } = React.useContext(getAuthCoreContext());
+  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext());
 
   const doSignOut = React.useCallback(async () => {
     dispatch({
@@ -23,6 +24,7 @@ export default function useGoogleSignOut (): UseSignOutTuple {
     });
 
     try {
+      await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
 
       await Auth.signOut({

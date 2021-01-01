@@ -1,3 +1,4 @@
+import { federatedSignIn } from '@ivyhjk/amplify-react-federated-auth';
 import {
   GoogleSignin,
   statusCodes,
@@ -10,7 +11,6 @@ import React from 'react';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 import { resetSocialAuthContext } from '../../SocialAuthContext';
 import SocialAuthProvider from '../../SocialAuthProvider';
-import federatedSignIn from '../../utils/federatedSignIn';
 import flushPromises from '../flushPromises';
 
 jest.mock('@react-native-community/google-signin');

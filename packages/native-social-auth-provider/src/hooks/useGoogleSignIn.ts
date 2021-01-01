@@ -1,7 +1,11 @@
 import {
-  BaseAuthCoreContextValue,
-  getAuthCoreContext
-} from '@ivyhjk/amplify-react-core-auth-provider';
+  BaseCoreAuthContextValue,
+  getCoreAuthContext
+} from '@ivyhjk/amplify-react-core-auth';
+import {
+  federatedSignIn,
+  FederatedUser
+} from '@ivyhjk/amplify-react-federated-auth';
 import {
   GoogleSignin,
   statusCodes
@@ -9,15 +13,14 @@ import {
 import React from 'react';
 
 import { SocialAuthContextValue } from '../types';
-import federatedSignIn from '../utils/federatedSignIn';
 
 type UseSignInTuple = [
   SocialAuthContextValue['googleSignIn'],
-  BaseAuthCoreContextValue
+  BaseCoreAuthContextValue<FederatedUser>
 ];
 
 export default function useGoogleSignIn (): UseSignInTuple {
-  const { error, loading, user, dispatch } = React.useContext(getAuthCoreContext());
+  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext());
 
   const googleSignIn = React.useCallback(async () => {
     dispatch({

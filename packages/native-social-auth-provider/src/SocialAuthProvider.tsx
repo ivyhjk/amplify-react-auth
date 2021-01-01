@@ -1,15 +1,22 @@
 import {
-  AuthCoreProvider,
-  getAuthCoreContext
-} from '@ivyhjk/amplify-react-core-auth-provider';
+  CoreAuthProvider,
+  getCoreAuthContext
+} from '@ivyhjk/amplify-react-core-auth';
+import { FederatedUser } from '@ivyhjk/amplify-react-federated-auth';
 import React from 'react';
 
 import { useGoogleSignIn, useGoogleSignOut } from './hooks';
 import { getSocialAuthContext } from './SocialAuthContext';
 
-const SocialAuthContextProvider: React.FC = ({ children }) => {
-  const SocialAuthContext = getSocialAuthContext();
-  const CoreAuthContext = getAuthCoreContext();
+interface SocialAuthProviderProps {
+  children: React.ReactNode
+}
+
+function SocialAuthContextProvider<TUser extends FederatedUser> ({
+  children
+}: SocialAuthProviderProps): React.ReactElement<SocialAuthProviderProps> {
+  const SocialAuthContext = getSocialAuthContext<TUser>();
+  const CoreAuthContext = getCoreAuthContext<TUser>();
   const [googleSignIn] = useGoogleSignIn();
   const [googleSignOut] = useGoogleSignOut();
 
@@ -30,16 +37,16 @@ const SocialAuthContextProvider: React.FC = ({ children }) => {
       )}
     </CoreAuthContext.Consumer>
   );
-};
+}
 
-const SocialAuthProvider: React.FC = ({ children }) => {
+export default function SocialAuthProvider<TUser extends FederatedUser = FederatedUser> ({
+  children
+}: SocialAuthProviderProps): React.ReactElement<SocialAuthProviderProps> {
   return (
-    <AuthCoreProvider>
-      <SocialAuthContextProvider>
+    <CoreAuthProvider>
+      <SocialAuthContextProvider<TUser>>
         {children}
       </SocialAuthContextProvider>
-    </AuthCoreProvider>
+    </CoreAuthProvider>
   );
-};
-
-export default SocialAuthProvider;
+}

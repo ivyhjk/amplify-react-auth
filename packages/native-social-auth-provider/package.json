@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@ivyhjk/amplify-react-core-auth": "file:../core-auth",
+    "@ivyhjk/amplify-react-federated-auth": "file:../federated-auth",
     "@react-native-community/google-signin": "^5.0.0"
   }
 }
