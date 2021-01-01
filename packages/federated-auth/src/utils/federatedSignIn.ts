@@ -1,12 +1,11 @@
 import { FederatedUser, LegacyProvider } from '@aws-amplify/auth/lib-esm/types';
-import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 
-export default async function federatedSignIn (
+export default async function federatedSignIn<TUser extends FederatedUser> (
   provider: LegacyProvider,
   token: string,
   user: FederatedUser
-): Promise<CognitoUser> {
+): Promise<TUser> {
   const date = new Date();
 
   await Auth.federatedSignIn(
