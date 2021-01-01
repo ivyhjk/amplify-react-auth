@@ -1,19 +1,17 @@
-import { CognitoUser } from 'amazon-cognito-identity-js';
-
-export interface BaseAuthCoreContextValue {
+export interface BaseAuthCoreContextValue<TUser> {
   error?: Error;
   loading: boolean;
-  user?: CognitoUser;
+  user?: TUser;
 }
 
-export type AuthCoreContextDispatcher = React.Dispatch<
-  React.SetStateAction<BaseAuthCoreContextValue>
+export type AuthCoreContextDispatcher<TUser> = React.Dispatch<
+  React.SetStateAction<BaseAuthCoreContextValue<TUser>>
 >;
 
-export interface AuthCoreContextValue extends BaseAuthCoreContextValue {
-  dispatch: AuthCoreContextDispatcher
+export interface AuthCoreContextValue<TUser> extends BaseAuthCoreContextValue<TUser> {
+  dispatch: AuthCoreContextDispatcher<TUser>
 }
 
-export type AuthContextFunction<T extends Array<unknown> = []> = (
-  dispatcher: AuthCoreContextDispatcher
+export type AuthContextFunction<TUser, T extends Array<unknown> = []> = (
+  dispatcher: AuthCoreContextDispatcher<TUser>
 ) => (...args: T) => (void | Promise<void>);
