@@ -107,14 +107,17 @@ const Component: React.FC = () => {
 
 ```tsx
 import { useCurrentAuthenticatedUser } from '@ivyhjk/amplify-react-native-social-auth';
+import { Text, View } from 'react-native';
 
 const UserComponent: React.FC = () => {
   const { error, loading, user } = useCurrentAuthenticatedUser();
 
   return (
-    <p>
-      Welcome {user.name}
-    </p>
+    <View>
+      <Text>
+        Welcome {user.name}
+      </Text>
+    </View>
   );
 }
 ```
@@ -123,14 +126,17 @@ const UserComponent: React.FC = () => {
 
 ```tsx
 import { useUser } from '@ivyhjk/amplify-react-native-social-auth';
+import { Text, View } from 'react-native';
 
 const UserComponent: React.FC = () => {
   const user = useUser();
 
   return (
-    <p>
-      Welcome {user.name}
-    </p>
+    <View>
+      <Text>
+        Welcome {user.name}
+      </Text>
+    </View>
   );
 }
 ```
