@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react';
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import AuthCoreProvider from '../../AuthCoreProvider';
+import CoreAuthProvider from '../../CoreAuthProvider';
 import useCurrentAuthenticatedUser from '../../hooks/useCurrentAuthenticatedUser';
 
 jest.mock('aws-amplify');
@@ -25,9 +25,9 @@ describe('core-auth.hooks.useCurrentAuthenticatedUser', () => {
     }
 
     render(
-      <AuthCoreProvider>
+      <CoreAuthProvider>
         <App />
-      </AuthCoreProvider>
+      </CoreAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);

@@ -1,8 +1,8 @@
 import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import { getAuthCoreContext } from '../../AuthCoreContext';
-import AuthCoreProvider from '../../AuthCoreProvider';
+import { getCoreAuthContext } from '../../CoreAuthContext';
+import CoreAuthProvider from '../../CoreAuthProvider';
 import useUser from '../../hooks/useUser';
 
 type CustomUser = {
@@ -16,7 +16,7 @@ describe('core-auth.hooks.useUser', () => {
     const statesSpy = jest.fn();
 
     function SetUser () {
-      const { dispatch } = React.useContext(getAuthCoreContext<CustomUser>());
+      const { dispatch } = React.useContext(getCoreAuthContext<CustomUser>());
 
       React.useEffect(() => {
         dispatch({
@@ -39,10 +39,10 @@ describe('core-auth.hooks.useUser', () => {
     }
 
     render(
-      <AuthCoreProvider>
+      <CoreAuthProvider>
         <SetUser />
         <App />
-      </AuthCoreProvider>
+      </CoreAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AuthCoreContextValue } from './types';
+import { CoreAuthContextValue } from './types';
 
 // To make sure AuthCore doesn't create more than one React context
 // (which can lead to problems like having an AuthCore instance added
@@ -12,14 +12,14 @@ import { AuthCoreContextValue } from './types';
 // If Symbol's aren't available, we'll use a fallback string as the context
 // property (we're looking at you, IE11).
 const contextSymbol = typeof Symbol === 'function' && Symbol.for
-  ? Symbol.for('__AUTH_CORE_CONTEXT__')
-  : '__AUTH_CORE_CONTEXT__';
+  ? Symbol.for('__CORE_AUTH_CONTEXT__')
+  : '__CORE_AUTH_CONTEXT__';
 
-export function resetAuthCoreContext<TUser> (): void {
+export function resetCoreAuthContext<TUser> (): void {
   Object.defineProperty(React, contextSymbol, {
     configurable: true,
     enumerable: false,
-    value: React.createContext<AuthCoreContextValue<TUser>>({
+    value: React.createContext<CoreAuthContextValue<TUser>>({
       error: undefined,
       loading: false,
       user: undefined,
@@ -29,14 +29,14 @@ export function resetAuthCoreContext<TUser> (): void {
   });
 }
 
-export function getAuthCoreContext<TUser> (
+export function getCoreAuthContext<TUser> (
 
-): React.Context<AuthCoreContextValue<TUser>> {
+): React.Context<CoreAuthContextValue<TUser>> {
   if (!(React as Record<string, unknown>)[contextSymbol as string]) {
-    resetAuthCoreContext();
+    resetCoreAuthContext();
   }
 
   return (
     React as Record<string, unknown>
-  )[contextSymbol as string] as React.Context<AuthCoreContextValue<TUser>>;
+  )[contextSymbol as string] as React.Context<CoreAuthContextValue<TUser>>;
 }

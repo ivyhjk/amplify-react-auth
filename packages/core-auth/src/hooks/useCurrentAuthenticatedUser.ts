@@ -1,18 +1,18 @@
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import { getAuthCoreContext } from '../AuthCoreContext';
-import { BaseAuthCoreContextValue } from '../types';
+import { getCoreAuthContext } from '../CoreAuthContext';
+import { BaseCoreAuthContextValue } from '../types';
 
 export default function useCurrentAuthenticatedUser<TUser> (
 
-): BaseAuthCoreContextValue<TUser> {
+): BaseCoreAuthContextValue<TUser> {
   const {
     error,
     loading,
     user,
     dispatch
-  } = React.useContext(getAuthCoreContext<TUser>());
+  } = React.useContext(getCoreAuthContext<TUser>());
 
   React.useEffect(() => {
     dispatch({

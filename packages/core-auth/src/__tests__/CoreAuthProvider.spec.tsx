@@ -1,17 +1,17 @@
 import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import { getAuthCoreContext } from '../AuthCoreContext';
-import AuthCoreProvider from '../AuthCoreProvider';
+import { getCoreAuthContext } from '../CoreAuthContext';
+import CoreAuthProvider from '../CoreAuthProvider';
 
-describe('core-auth.AuthCoreProvider', () => {
+describe('core-auth.CoreAuthProvider', () => {
   jest.useFakeTimers();
 
   it('should render children components', async () => {
     const rendered = render(
-      <AuthCoreProvider>
+      <CoreAuthProvider>
         <div className="unique">Test</div>
-      </AuthCoreProvider>
+      </CoreAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);
@@ -28,7 +28,7 @@ describe('core-auth.AuthCoreProvider', () => {
         error,
         loading,
         user
-      } = React.useContext(getAuthCoreContext());
+      } = React.useContext(getCoreAuthContext());
 
       contextSpy({
         error,
@@ -46,9 +46,9 @@ describe('core-auth.AuthCoreProvider', () => {
     };
 
     render(
-      <AuthCoreProvider>
+      <CoreAuthProvider>
         <TestChild />
-      </AuthCoreProvider>
+      </CoreAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);

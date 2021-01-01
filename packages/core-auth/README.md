@@ -21,10 +21,12 @@ yarn add @ivyhjk/amplify-react-core-auth
 Put the context in your main application component:
 
 ```tsx
+import { CoreAuthContext } from '@ivyhjk/amplify-react-core-auth';
+
 const App: React.Fc = () => (
-  <AuthCoreContext>
+  <CoreAuthContext>
     {/* ... */}
-  </AuthCoreContext>
+  </CoreAuthContext>
 );
 ```
 

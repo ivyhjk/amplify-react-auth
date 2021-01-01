@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { getAuthCoreContext } from '../AuthCoreContext';
+import { getCoreAuthContext } from '../CoreAuthContext';
 
 export default function useUser<TUser> (): TUser | undefined {
-  const { user } = React.useContext(getAuthCoreContext<TUser>());
+  const { user } = React.useContext(getCoreAuthContext<TUser>());
 
   return user;
 }
