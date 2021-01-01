@@ -4,6 +4,7 @@ jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
 jest.mock('@react-native-community/google-signin', () => ({
   GoogleSignin: {
     hasPlayServices: jest.fn(),
+    revokeAccess: jest.fn(),
     signIn: jest.fn(),
     signOut: jest.fn()
   },

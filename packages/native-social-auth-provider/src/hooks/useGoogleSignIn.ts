@@ -14,13 +14,15 @@ import React from 'react';
 
 import { SocialAuthContextValue } from '../types';
 
-type UseSignInTuple = [
+type UseSignInTuple<TUser extends FederatedUser> = [
   SocialAuthContextValue['googleSignIn'],
-  BaseCoreAuthContextValue<FederatedUser>
+  BaseCoreAuthContextValue<TUser>
 ];
 
-export default function useGoogleSignIn (): UseSignInTuple {
-  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext());
+export default function useGoogleSignIn <TUser extends FederatedUser = FederatedUser> (
+
+): UseSignInTuple<TUser> {
+  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext<TUser>());
 
   const googleSignIn = React.useCallback(async () => {
     dispatch({
@@ -35,7 +37,7 @@ export default function useGoogleSignIn (): UseSignInTuple {
       try {
         const userInfo = await GoogleSignin.signIn();
 
-        const user = await federatedSignIn(
+        const user = await federatedSignIn<TUser>(
           'google',
           userInfo.idToken as string,
           {

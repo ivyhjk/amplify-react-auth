@@ -16,6 +16,7 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
   beforeEach(async () => {
     resetSocialAuthContext();
 
+    (GoogleSignin.revokeAccess as jest.Mock).mockClear();
     (GoogleSignin.signOut as jest.Mock).mockClear();
     (Auth.signOut as jest.Mock).mockClear();
   });
@@ -41,6 +42,8 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
   };
 
   it('should dispatch a successful sign out', async () => {
+    (GoogleSignin.revokeAccess as jest.Mock)
+      .mockImplementation(() => Promise.resolve());
     (GoogleSignin.signOut as jest.Mock)
       .mockImplementation(() => Promise.resolve());
 
@@ -81,7 +84,7 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
   });
 
   it('should dispatch a failed sign out', async () => {
-    (GoogleSignin.signOut as jest.Mock)
+    (GoogleSignin.revokeAccess as jest.Mock)
       .mockImplementation(() => Promise.reject(new Error('oops!')));
 
     const statesSpy = jest.fn();
@@ -90,7 +93,7 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
     await waitFor(flushPromises);
 
-    expect(GoogleSignin.signOut).toBeCalledTimes(1);
+    expect(GoogleSignin.revokeAccess).toBeCalledTimes(1);
 
     expect(Auth.signOut).not.toBeCalled();
 

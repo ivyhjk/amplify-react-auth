@@ -14,8 +14,10 @@ type UseSignOutTuple = [
   BaseCoreAuthContextValue<FederatedUser>
 ];
 
-export default function useGoogleSignOut (): UseSignOutTuple {
-  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext());
+export default function useGoogleSignOut<TUser extends FederatedUser = FederatedUser> (
+
+): UseSignOutTuple {
+  const { error, loading, user, dispatch } = React.useContext(getCoreAuthContext<TUser>());
 
   const doSignOut = React.useCallback(async () => {
     dispatch({
