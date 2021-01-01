@@ -13,8 +13,8 @@ import { resetSocialAuthContext } from '../../SocialAuthContext';
 import SocialAuthProvider from '../../SocialAuthProvider';
 import flushPromises from '../flushPromises';
 
+jest.mock('@ivyhjk/amplify-react-federated-auth');
 jest.mock('@react-native-community/google-signin');
-jest.mock('../../utils/federatedSignIn');
 
 describe('social-auth-provider.hooks.useGoogleSignIn', () => {
   const googleUser: User = {
