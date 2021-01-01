@@ -1,4 +1,4 @@
-export { default as AuthCoreProvider } from './AuthCoreProvider';
+export { default as CoreAuthProvider } from './CoreAuthProvider';
 
 export * from './CoreAuthContext';
 export * from './hooks';
