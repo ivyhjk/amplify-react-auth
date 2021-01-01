@@ -63,7 +63,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@ivyhjk/amplify-react-auth-provider": "file:packages/auth-provider",
+    "@ivyhjk/amplify-react-auth": "file:packages/auth",
     "@ivyhjk/amplify-react-core-auth": "file:packages/core-auth",
     "@ivyhjk/amplify-react-federated-auth": "file:packages/federated-auth",
     "@ivyhjk/amplify-react-native-social-auth-provider": "file:packages/native-social-auth-provider"

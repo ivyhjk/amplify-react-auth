@@ -5,7 +5,7 @@
   "files": [],
   "include": [],
   "references": [
-    { "path": "./packages/auth-provider" },
+    { "path": "./packages/auth" },
     { "path": "./packages/core-auth" },
     { "path": "./packages/federated-auth" },
     { "path": "./packages/native-social-auth-provider" }
