@@ -22,6 +22,7 @@
     "react": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
-    "@ivyhjk/amplify-react-core-auth-provider": "file:../core-auth-provider"
+    "@ivyhjk/amplify-react-core-auth": "file:../core-auth",
+    "amazon-cognito-identity-js": "^4.5.6"
   }
 }

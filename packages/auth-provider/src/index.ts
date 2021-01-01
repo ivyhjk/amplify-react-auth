@@ -1,4 +1,4 @@
-export * from '@ivyhjk/amplify-react-core-auth-provider';
+export * from '@ivyhjk/amplify-react-core-auth';
 
 export { default as AuthProvider } from './AuthProvider';
 
