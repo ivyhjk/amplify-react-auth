@@ -6,3 +6,13 @@ export interface SocialAuthContextValue<TUser extends FederatedUser = FederatedU
   googleSignIn: () => void;
   googleSignOut: () => void;
 }
+
+export interface GoogleUser extends FederatedUser {
+  email: string;
+  familyName: string;
+  givenName: string;
+  id: string;
+  name: string;
+  photo: string;
+  token: string;
+}
