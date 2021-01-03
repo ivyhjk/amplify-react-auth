@@ -1,5 +1,5 @@
 {
-  "name": "@ivyhjk/amplify-react-native-social",
+  "name": "@ivyhjk/amplify-react-native-social-auth",
   "version": "1.0.0-next.1",
   "description": "React Native social authentication wrapper for amplify",
   "main": "dist/index.js",
