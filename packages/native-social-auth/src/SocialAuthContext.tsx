@@ -1,3 +1,7 @@
+import {
+  getCachedContext,
+  resetCachedContext
+} from '@ivyhjk/amplify-react-core-auth';
 import { FederatedUser } from '@ivyhjk/amplify-react-federated-auth';
 import React from 'react';
 
@@ -16,29 +20,26 @@ const contextSymbol = typeof Symbol === 'function' && Symbol.for
   ? Symbol.for('__SOCIAL_AUTH_CONTEXT__')
   : '__SOCIAL_AUTH_CONTEXT__';
 
+const defaultContextValue = {
+  error: undefined,
+  googleSignIn: () => { /* default empty function */ },
+  googleSignOut: () => { /* default empty function */ },
+  loading: false,
+  user: undefined
+};
+
 export function resetSocialAuthContext<TUser extends FederatedUser> (): void {
-  Object.defineProperty(React, contextSymbol, {
-    configurable: true,
-    enumerable: false,
-    value: React.createContext<SocialAuthContextValue<TUser>>({
-      error: undefined,
-      googleSignIn: () => { /* default empty function */ },
-      googleSignOut: () => { /* default empty function */ },
-      loading: false,
-      user: undefined
-    }),
-    writable: false
-  });
+  resetCachedContext<SocialAuthContextValue<TUser>>(
+    contextSymbol,
+    defaultContextValue
+  );
 }
 
-export function getSocialAuthContext<TUser extends FederatedUser = FederatedUser> (
+export function getSocialAuthContext<TUser extends FederatedUser> (
 
 ): React.Context<SocialAuthContextValue<TUser>> {
-  if (!(React as Record<string, unknown>)[contextSymbol as string]) {
-    resetSocialAuthContext();
-  }
-
-  return (
-    React as Record<string, unknown>
-  )[contextSymbol as string] as React.Context<SocialAuthContextValue<TUser>>;
+  return getCachedContext<SocialAuthContextValue<TUser>>(
+    contextSymbol,
+    defaultContextValue
+  );
 }
