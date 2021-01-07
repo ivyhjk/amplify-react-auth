@@ -8,6 +8,7 @@
     { "path": "./packages/auth" },
     { "path": "./packages/core-auth" },
     { "path": "./packages/federated-auth" },
-    { "path": "./packages/native-social-auth" }
+    { "path": "./packages/native-social-auth" },
+    { "path": "./packages/oauth" }
   ]
 }
