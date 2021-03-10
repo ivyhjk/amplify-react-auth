@@ -18,7 +18,23 @@ yarn add @ivyhjk/amplify-react-oauth
 
 ## Usage
 
-Put the context in your main application component:
+At first, configure your Amplifu OAuth2 client:
+
+```tsx
+import { Auth } from 'aws-amplify';
+
+Auth.configure({
+  userPoolId: 'YOUR_AWS_COGNITO_USER_POOL_ID',
+  region: 'YOUR_AWS_COGNITO_REGION',
+  userPoolWebClientId: 'YOUR_AWS_COGNITO_WEB_CLIENT_ID',
+  oauth: {
+    redirectSignIn: 'YOUR_AWS_COGNITO_SIGN_IN_REDIRECT',
+    redirectSignOut: 'YOUR_AWS_COGNITO_SIGN_OUT_REDIRECT',
+  }
+});
+```
+
+Then, add the context in your main application component:
 
 ```tsx
 import { OAuthProvider } from '@ivyhjk/amplify-react-oauth';
