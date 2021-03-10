@@ -49,12 +49,12 @@ const App: React.Fc = () => (
 
 ### Hooks
 
-**Sign in with Google**:
+**Federated sign in (with Google)**:
 
 ```tsx
+import React from 'react';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { useFederatedSignIn } from '@ivyhjk/amplify-react-oauth';
-import { Button, Text, View } from 'react-native';
 
 const Component: React.FC = () => {
   const [signIn, { loading, error, user }] = useFederatedSignIn();
@@ -65,26 +65,115 @@ const Component: React.FC = () => {
 
   if (error) {
     return (
-      <View>
-        <Text>Error: {error.message}</Text>
-      </View>
+      <p>error: {error.message}</p>
     );
   }
 
   if (user) {
     return (
-      <View>
-        <Text>welcome, {user.name}</Text>
-      </View>
+      <p>welcome, {user.name}</p>
     );
   }
 
   return (
-    <View>
-      <Button disabled={loading} onPress={handleSignIn}>
-        Federated sign in
-      </Button>
-    </View>
+    <button disabled={loading} onClick={handleSignIn}>
+      Federated sign in
+    </button>
   );
 };
+
+export default Component;
 ```
+
+**Get the current OAuth user**:
+
+```tsx
+import React from 'react';
+import { useCurrentOAuthAuthenticatedUser } from '@ivyhjk/amplify-react-oauth';
+
+const Component: React.FC = () => {
+  const { user, loading, error } = useCurrentOAuthAuthenticatedUser();
+
+  if (loading) {
+    return (
+      <p>loading...</p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p>error: {error.message}</p>
+    );
+  }
+
+  return (
+    <p>username: {user.name}</p>
+  );
+};
+
+export default Component;
+```
+
+**Get the current OAuth user fast (from cache, user should be previously authenticated)**:
+
+```tsx
+import React from 'react';
+import { useUserPayload } from '@ivyhjk/amplify-react-oauth';
+
+const Component: React.FC = () => {
+  const user = useUserPayload();
+
+  return (
+    <p>username: {user.name}</p>
+  );
+};
+
+export default Component;
+```
+
+
+**Signing out**:
+
+```tsx
+import React from 'react';
+import { useSignOut } from '@ivyhjk/amplify-react-oauth';
+
+const Component: React.FC = () => {
+  const [signOut, { loading, error, user }] = useSignOut();
+
+  const handleSignOut = React.useCallback(() => {
+    signOut();
+  }, [signOut]);
+
+  if (loading) {
+    return (
+      <p>loading...</p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p>error: {error.message}</p>
+    );
+  }
+
+  if (user) {
+    return (
+      <div>
+        <p>username: {user.name}</p>
+
+        <button disabled={loading} onClick={handleSignOut}>
+          Sign out
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <p>signed out</p>
+  );
+};
+
+export default Component;
+```
+
