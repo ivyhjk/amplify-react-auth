@@ -30,7 +30,7 @@
     "@types/graphql": "^14.5.0",
     "@types/jest": "^26.0.19",
     "@types/react": "^17.0.0",
-    "@types/react-native": "^0.63.43",
+    "@types/react-native": "^0.64.0",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "amazon-cognito-identity-js": "^4.5.6",
