@@ -1,34 +1,20 @@
 import { render, waitFor } from '@testing-library/react';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import { getCoreAuthContext } from '../../CoreAuthContext';
 import CoreAuthProvider from '../../CoreAuthProvider';
 import useUser from '../../hooks/useUser';
 
-type CustomUser = {
-  foo: string;
-}
+jest.mock('aws-amplify');
 
 describe('core-auth.hooks.useUser', () => {
   jest.useFakeTimers();
 
+  (Auth.currentAuthenticatedUser as jest.Mock)
+    .mockImplementation(() => Promise.resolve({ foo: 'bar' }));
+
   it('should return a valid state from the context if available', async () => {
     const statesSpy = jest.fn();
-
-    function SetUser () {
-      const { dispatch } = React.useContext(getCoreAuthContext<CustomUser>());
-
-      React.useEffect(() => {
-        dispatch({
-          loading: false,
-          user: {
-            foo: 'bar'
-          }
-        });
-      }, [dispatch]);
-
-      return null;
-    }
 
     function App () {
       const state = useUser();
@@ -40,7 +26,6 @@ describe('core-auth.hooks.useUser', () => {
 
     render(
       <CoreAuthProvider>
-        <SetUser />
         <App />
       </CoreAuthProvider>
     );
