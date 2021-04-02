@@ -10,12 +10,8 @@ type User = {
   }
 }
 
-export default function useUserPayload (): UserPayload {
+export default function useUserPayload (): UserPayload | undefined {
   const user = useUser<User>();
 
-  if (!user) {
-    throw new Error('failed to get user, please sign in');
-  }
-
-  return user.signInUserSession.idToken.payload;
+  return user?.signInUserSession.idToken.payload;
 }
