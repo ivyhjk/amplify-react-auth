@@ -1,6 +1,6 @@
 {
   "name": "@ivyhjk/amplify-react-core-auth",
-  "version": "1.0.0-next.6",
+  "version": "1.0.0-next.7",
   "description": "Core React authentication wrapper for amplify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
