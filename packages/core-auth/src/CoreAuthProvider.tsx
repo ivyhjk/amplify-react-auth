@@ -1,11 +1,8 @@
 import React from 'react';
 
 import { getCoreAuthContext } from './CoreAuthContext';
+import { useCurrentAuthenticatedUser } from './hooks';
 import { BaseCoreAuthContextValue } from './types';
-
-const defaultState = {
-  loading: false
-};
 
 interface CoreAuthProviderProps {
   children: React.ReactNode
@@ -14,18 +11,17 @@ interface CoreAuthProviderProps {
 export default function CoreAuthProvider<TUser> ({
   children
 }: CoreAuthProviderProps): React.ReactElement<CoreAuthProviderProps> {
-  const [state, setState] = React.useState<BaseCoreAuthContextValue<TUser>>(
-    defaultState
-  );
+  const authenticatedUserState = useCurrentAuthenticatedUser<TUser>();
+  const [state, setState] = React.useState<BaseCoreAuthContextValue<TUser>>();
   const CoreAuthContext = getCoreAuthContext<TUser>();
 
   return (
     <CoreAuthContext.Provider
       value={{
-        dispatch: setState,
-        error: state.error,
-        loading: state.loading,
-        user: state.user
+        dispatch: setState as React.Dispatch<React.SetStateAction<BaseCoreAuthContextValue<TUser>>>,
+        error: state ? state.error : authenticatedUserState.error,
+        loading: state ? state.loading : authenticatedUserState.loading,
+        user: state ? state.user : authenticatedUserState.user
       }}
     >
       {children}
