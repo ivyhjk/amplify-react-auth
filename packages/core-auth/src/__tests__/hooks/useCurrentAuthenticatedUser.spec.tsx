@@ -2,7 +2,6 @@ import { render, waitFor } from '@testing-library/react';
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import CoreAuthProvider from '../../CoreAuthProvider';
 import useCurrentAuthenticatedUser from '../../hooks/useCurrentAuthenticatedUser';
 
 jest.mock('aws-amplify');
@@ -24,29 +23,20 @@ describe('core-auth.hooks.useCurrentAuthenticatedUser', () => {
       return null;
     }
 
-    render(
-      <CoreAuthProvider>
-        <App />
-      </CoreAuthProvider>
-    );
+    // this hook doesn't require CoreAuthProvider, has their own state
+    render(<App />);
 
     await waitFor(jest.runOnlyPendingTimers);
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: false,
       user: {

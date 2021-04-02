@@ -1,38 +1,32 @@
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import { getCoreAuthContext } from '../CoreAuthContext';
 import { BaseCoreAuthContextValue } from '../types';
+
+const defaultState = {
+  loading: true
+};
 
 export default function useCurrentAuthenticatedUser<TUser> (
 
 ): BaseCoreAuthContextValue<TUser> {
-  const {
-    error,
-    loading,
-    user,
-    dispatch
-  } = React.useContext(getCoreAuthContext<TUser>());
+  const [state, setState] = React.useState<BaseCoreAuthContextValue<TUser>>(
+    defaultState
+  );
 
   React.useEffect(() => {
-    dispatch({
-      error: undefined,
-      loading: true,
-      user: undefined
-    });
-
     Auth.currentAuthenticatedUser({
       bypassCache: true
     })
-      .then((data) => dispatch({
+      .then((data) => setState({
         loading: false,
         user: data
       }))
-      .catch((error) => dispatch({
+      .catch((error) => setState({
         error,
         loading: false
       }));
-  }, [dispatch]);
+  }, []);
 
-  return { error, loading, user };
+  return state;
 }
