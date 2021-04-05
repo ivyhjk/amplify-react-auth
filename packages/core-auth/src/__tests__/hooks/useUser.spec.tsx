@@ -1,9 +1,9 @@
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
-import CoreAuthProvider from '../../CoreAuthProvider';
 import useUser from '../../hooks/useUser';
+import MockedCoreAuthProvider from '../../tests/MockedCoreAuthProvider';
 
 jest.mock('aws-amplify');
 
@@ -24,18 +24,17 @@ describe('core-auth.hooks.useUser', () => {
       return null;
     }
 
+    const user = {
+      foo: 'bar'
+    };
+
     render(
-      <CoreAuthProvider>
+      <MockedCoreAuthProvider user={user}>
         <App />
-      </CoreAuthProvider>
+      </MockedCoreAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
-
-    expect(statesSpy).toBeCalledTimes(2);
-
-    expect(statesSpy).toHaveBeenNthCalledWith(1, undefined);
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
+    expect(statesSpy).toBeCalledWith({
       foo: 'bar'
     });
   });
