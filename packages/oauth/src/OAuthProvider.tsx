@@ -10,13 +10,13 @@ import { useFederatedSignIn, useSignOut } from './hooks';
 import { getOAuthContext } from './OAuthContext';
 import { OAuthUser } from './types';
 
-interface SocialAuthProviderProps {
+interface OAuthProviderProps {
   children: React.ReactNode
 }
 
-function OAuthContextProvider ({
+export function OAuthContextProvider ({
   children
-}: SocialAuthProviderProps): React.ReactElement<SocialAuthProviderProps> {
+}: OAuthProviderProps): React.ReactElement<OAuthProviderProps> {
   const OAuthContext = getOAuthContext();
   const [federatedSignIn] = useFederatedSignIn();
   const [signOut] = useSignOut();
@@ -76,7 +76,7 @@ function OAuthContextProvider ({
 
 export default function OAuthProvider ({
   children
-}: SocialAuthProviderProps): React.ReactElement<SocialAuthProviderProps> {
+}: OAuthProviderProps): React.ReactElement<OAuthProviderProps> {
   return (
     <CoreAuthProvider>
       <OAuthContextProvider>

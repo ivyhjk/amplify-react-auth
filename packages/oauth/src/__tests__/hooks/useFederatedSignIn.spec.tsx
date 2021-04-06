@@ -4,7 +4,7 @@ import { Auth, Hub } from 'aws-amplify';
 import React from 'react';
 
 import useFederatedSignIn from '../../hooks/useFederatedSignIn';
-import OAuthProvider from '../../OAuthProvider';
+import MockedOAuthProvider from '../../tests/MockedOAuthProvider';
 
 const AMPLIFY_SYMBOL = Symbol.for('amplify_default');
 
@@ -54,21 +54,19 @@ describe('oauth.hooks.useFederatedSignIn', () => {
     const statesSpy = jest.fn();
 
     function App () {
-      const [doSignIn, state] = useFederatedSignIn();
+      const [doSignIn] = useFederatedSignIn();
 
       React.useEffect(() => {
         doSignIn(CognitoHostedUIIdentityProvider.Google);
       }, [doSignIn]);
 
-      statesSpy(state);
-
       return null;
     }
 
     render(
-      <OAuthProvider>
+      <MockedOAuthProvider dispatch={statesSpy}>
         <App />
-      </OAuthProvider>
+      </MockedOAuthProvider>
     );
 
     await waitFor(jest.runAllTimers);
@@ -84,22 +82,16 @@ describe('oauth.hooks.useFederatedSignIn', () => {
         foo: 'bar'
       });
 
-      expect(statesSpy).toBeCalledTimes(3);
+      expect(statesSpy).toBeCalledTimes(2);
 
       expect(statesSpy).toHaveBeenNthCalledWith(1, {
-        error: undefined,
-        loading: false,
-        user: undefined
-      });
-
-      expect(statesSpy).toHaveBeenNthCalledWith(2, {
         error: undefined,
         loading: true,
         user: undefined
       });
 
       // ensure that user is taken from currentAuthenticatedUser
-      expect(statesSpy).toHaveBeenNthCalledWith(3, {
+      expect(statesSpy).toHaveBeenNthCalledWith(2, {
         error: undefined,
         loading: false,
         user: {
@@ -115,21 +107,15 @@ describe('oauth.hooks.useFederatedSignIn', () => {
     for (const event of events) {
       const statesSpy = await runSignIn(event, new Error('oops!'));
 
-      expect(statesSpy).toBeCalledTimes(3);
+      expect(statesSpy).toBeCalledTimes(2);
 
       expect(statesSpy).toHaveBeenNthCalledWith(1, {
-        error: undefined,
-        loading: false,
-        user: undefined
-      });
-
-      expect(statesSpy).toHaveBeenNthCalledWith(2, {
         error: undefined,
         loading: true,
         user: undefined
       });
 
-      expect(statesSpy).toHaveBeenNthCalledWith(3, {
+      expect(statesSpy).toHaveBeenNthCalledWith(2, {
         error: new Error('oops!'),
         loading: false,
         user: undefined

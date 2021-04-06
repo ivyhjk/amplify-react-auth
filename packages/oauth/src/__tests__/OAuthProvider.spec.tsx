@@ -3,7 +3,7 @@ import { Auth, Hub } from 'aws-amplify';
 import React from 'react';
 
 import { getOAuthContext } from '../OAuthContext';
-import OAuthProvider from '../OAuthProvider';
+import MockedOAuthProvider from '../tests/MockedOAuthProvider';
 
 const AMPLIFY_SYMBOL = Symbol.for('amplify_default');
 
@@ -18,9 +18,9 @@ describe('oauth.OAuthProvider', () => {
 
   it('should render children components', async () => {
     const rendered = render(
-      <OAuthProvider>
+      <MockedOAuthProvider>
         <div className="unique">Test</div>
-      </OAuthProvider>
+      </MockedOAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);
@@ -49,9 +49,9 @@ describe('oauth.OAuthProvider', () => {
     };
 
     render(
-      <OAuthProvider>
+      <MockedOAuthProvider>
         <TestChild />
-      </OAuthProvider>
+      </MockedOAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);
@@ -62,26 +62,8 @@ describe('oauth.OAuthProvider', () => {
   const doRenderSpy = async () => {
     const stateSpy = jest.fn();
 
-    const TestChild = () => {
-      const {
-        error,
-        loading,
-        user
-      } = React.useContext(getOAuthContext());
-
-      stateSpy({
-        error,
-        loading,
-        user
-      });
-
-      return null;
-    };
-
     render(
-      <OAuthProvider>
-        <TestChild />
-      </OAuthProvider>
+      <MockedOAuthProvider dispatch={stateSpy} />
     );
 
     await waitFor(jest.runOnlyPendingTimers);
@@ -100,13 +82,6 @@ describe('oauth.OAuthProvider', () => {
     for (const signInEvent of signInEvents) {
       const stateSpy = await doRenderSpy();
 
-      expect(stateSpy).toBeCalledTimes(1);
-      expect(stateSpy).toHaveBeenNthCalledWith(1, {
-        error: undefined,
-        loading: false,
-        user: undefined
-      });
-
       act(() => {
         Hub.dispatch(
           'auth',
@@ -123,8 +98,8 @@ describe('oauth.OAuthProvider', () => {
 
       await waitFor(jest.runOnlyPendingTimers);
 
-      expect(stateSpy).toBeCalledTimes(2);
-      expect(stateSpy).toHaveBeenNthCalledWith(2, {
+      expect(stateSpy).toBeCalledTimes(1);
+      expect(stateSpy).toBeCalledWith({
         error: undefined,
         loading: false,
         user: {
@@ -140,13 +115,6 @@ describe('oauth.OAuthProvider', () => {
     for (const signInFailureEvent of signInFailureEvents) {
       const stateSpy = await doRenderSpy();
 
-      expect(stateSpy).toBeCalledTimes(1);
-      expect(stateSpy).toHaveBeenNthCalledWith(1, {
-        error: undefined,
-        loading: false,
-        user: undefined
-      });
-
       act(() => {
         Hub.dispatch(
           'auth',
@@ -161,8 +129,8 @@ describe('oauth.OAuthProvider', () => {
 
       await waitFor(jest.runOnlyPendingTimers);
 
-      expect(stateSpy).toBeCalledTimes(2);
-      expect(stateSpy).toHaveBeenNthCalledWith(2, {
+      expect(stateSpy).toBeCalledTimes(1);
+      expect(stateSpy).toBeCalledWith({
         error: new Error('oops!'),
         loading: false,
         user: undefined
