@@ -8,7 +8,7 @@ import { getAuthContext } from './AuthContext';
 import { useSignIn, useSignOut } from './hooks';
 import { AuthUser } from './types';
 
-const AuthContextProvider: React.FC = ({ children }) => {
+export const AuthContextProvider: React.FC = ({ children }) => {
   const AuthContext = getAuthContext();
   const CoreAuthContext = getCoreAuthContext<AuthUser>();
   const [signIn] = useSignIn();

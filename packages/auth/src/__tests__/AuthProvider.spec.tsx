@@ -1,11 +1,19 @@
 import { render, waitFor } from '@testing-library/react';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
 import { getAuthContext } from '../AuthContext';
 import AuthProvider from '../AuthProvider';
 
+jest.mock('@aws-amplify/auth');
+
 describe('auth-provider.AuthProvider', () => {
   jest.useFakeTimers();
+
+  (Auth.currentAuthenticatedUser as jest.Mock)
+    .mockImplementation(() => Promise.resolve({
+      email: 'foo@bar.baz'
+    }));
 
   it('should render children components', async () => {
     const rendered = render(
@@ -22,16 +30,9 @@ describe('auth-provider.AuthProvider', () => {
   it('should update props when the state changes', async () => {
     const TestChild = () => {
       const {
-        error,
-        loading,
         signIn,
-        signOut,
-        user
+        signOut
       } = React.useContext(getAuthContext());
-
-      expect(error).toBeUndefined();
-      expect(loading).toBe(false);
-      expect(user).toBeUndefined();
 
       expect(signIn).toBeInstanceOf(Function);
       expect(signOut).toBeInstanceOf(Function);

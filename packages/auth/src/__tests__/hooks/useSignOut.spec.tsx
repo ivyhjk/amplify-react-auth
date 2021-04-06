@@ -3,8 +3,8 @@ import { Auth } from 'aws-amplify';
 import React from 'react';
 
 import { resetAuthContext } from '../../AuthContext';
-import AuthProvider from '../../AuthProvider';
 import useSignOut from '../../hooks/useSignOut';
+import MockedAuthProvider from '../../tests/MockedAuthProvider';
 
 jest.mock('aws-amplify');
 
@@ -21,9 +21,7 @@ describe('auth-provider.hooks.useSignOut', () => {
     const statesSpy = jest.fn();
 
     function App () {
-      const [doSignOut, state] = useSignOut();
-
-      statesSpy(state);
+      const [doSignOut] = useSignOut();
 
       React.useEffect(() => {
         doSignOut();
@@ -33,9 +31,9 @@ describe('auth-provider.hooks.useSignOut', () => {
     }
 
     render(
-      <AuthProvider>
+      <MockedAuthProvider dispatch={statesSpy}>
         <App />
-      </AuthProvider>
+      </MockedAuthProvider>
     );
 
     await waitFor(jest.runOnlyPendingTimers);
@@ -45,21 +43,15 @@ describe('auth-provider.hooks.useSignOut', () => {
       global: true
     });
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: false,
       user: undefined
