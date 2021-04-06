@@ -1,4 +1,5 @@
 import { render, waitFor } from '@testing-library/react-native';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 import { Text, View } from 'react-native';
 
@@ -9,10 +10,17 @@ import {
 import SocialAuthProvider from '../SocialAuthProvider';
 import flushPromises from './flushPromises';
 
+jest.mock('@aws-amplify/auth');
+
 describe('native-social-auth-provider.SocialAuthProvider', () => {
   beforeEach(async () => {
     resetSocialAuthContext();
   });
+
+  (Auth.currentAuthenticatedUser as jest.Mock)
+    .mockImplementation(() => Promise.resolve({
+      email: 'foo@bar.baz'
+    }));
 
   it('should render children components', async () => {
     const rendered = render(
@@ -33,16 +41,9 @@ describe('native-social-auth-provider.SocialAuthProvider', () => {
   it('should update props when the state changes', async () => {
     const TestChild = () => {
       const {
-        error,
         googleSignIn,
-        googleSignOut,
-        loading,
-        user
+        googleSignOut
       } = React.useContext(getSocialAuthContext());
-
-      expect(error).toBeUndefined();
-      expect(loading).toBe(false);
-      expect(user).toBeUndefined();
 
       expect(googleSignIn).toBeTruthy();
       expect(googleSignOut).toBeTruthy();

@@ -10,7 +10,7 @@ import React from 'react';
 
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 import { resetSocialAuthContext } from '../../SocialAuthContext';
-import SocialAuthProvider from '../../SocialAuthProvider';
+import MockedSocialAuthProvider from '../../tests/MockedSocialAuthProvider';
 import flushPromises from '../flushPromises';
 
 jest.mock('@ivyhjk/amplify-react-federated-auth');
@@ -36,9 +36,7 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
 
   const doRender = (statesSpy: jest.Mock) => {
     function App () {
-      const [doSignIn, state] = useGoogleSignIn();
-
-      statesSpy(state);
+      const [doSignIn] = useGoogleSignIn();
 
       React.useEffect(() => {
         doSignIn();
@@ -48,9 +46,9 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
     }
 
     render(
-      <SocialAuthProvider>
+      <MockedSocialAuthProvider dispatch={statesSpy}>
         <App />
-      </SocialAuthProvider>
+      </MockedSocialAuthProvider>
     );
   };
 
@@ -95,21 +93,15 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
       }
     );
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: false,
       user: {
@@ -133,21 +125,15 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
 
     expect(GoogleSignin.hasPlayServices).toBeCalledTimes(1);
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: new Error('oops!'),
       loading: false
     });
@@ -174,21 +160,15 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
 
     expect(GoogleSignin.hasPlayServices).toBeCalledTimes(1);
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       loading: false
     });
   });
@@ -214,21 +194,15 @@ describe('social-auth-provider.hooks.useGoogleSignIn', () => {
 
     expect(GoogleSignin.hasPlayServices).toBeCalledTimes(1);
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true,
       user: undefined
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error,
       loading: false
     });

@@ -7,7 +7,7 @@ import React from 'react';
 
 import useGoogleSignOut from '../../hooks/useGoogleSignOut';
 import { resetSocialAuthContext } from '../../SocialAuthContext';
-import SocialAuthProvider from '../../SocialAuthProvider';
+import MockedSocialAuthProvider from '../../tests/MockedSocialAuthProvider';
 import flushPromises from '../flushPromises';
 
 jest.mock('aws-amplify');
@@ -23,9 +23,7 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
   const doRender = (statesSpy: jest.Mock) => {
     function App () {
-      const [doSignOut, state] = useGoogleSignOut();
-
-      statesSpy(state);
+      const [doSignOut] = useGoogleSignOut();
 
       React.useEffect(() => {
         doSignOut();
@@ -35,9 +33,9 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
     }
 
     render(
-      <SocialAuthProvider>
+      <MockedSocialAuthProvider dispatch={statesSpy}>
         <App />
-      </SocialAuthProvider>
+      </MockedSocialAuthProvider>
     );
   };
 
@@ -63,20 +61,14 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
       global: true
     });
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: false,
       user: undefined
@@ -97,20 +89,14 @@ describe('social-auth-provider.hooks.useGoogleSignOut', () => {
 
     expect(Auth.signOut).not.toBeCalled();
 
-    expect(statesSpy).toBeCalledTimes(3);
+    expect(statesSpy).toBeCalledTimes(2);
 
     expect(statesSpy).toHaveBeenNthCalledWith(1, {
-      error: undefined,
-      loading: false,
-      user: undefined
-    });
-
-    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: undefined,
       loading: true
     });
 
-    expect(statesSpy).toHaveBeenNthCalledWith(3, {
+    expect(statesSpy).toHaveBeenNthCalledWith(2, {
       error: new Error('oops!'),
       loading: false
     });

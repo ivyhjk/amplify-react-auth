@@ -12,7 +12,7 @@ interface SocialAuthProviderProps {
   children: React.ReactNode
 }
 
-function SocialAuthContextProvider<TUser extends FederatedUser> ({
+export function SocialAuthContextProvider<TUser extends FederatedUser> ({
   children
 }: SocialAuthProviderProps): React.ReactElement<SocialAuthProviderProps> {
   const SocialAuthContext = getSocialAuthContext<TUser>();
