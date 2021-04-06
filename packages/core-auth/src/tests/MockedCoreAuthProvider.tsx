@@ -3,7 +3,7 @@ import React from 'react';
 import { getCoreAuthContext } from '../CoreAuthContext';
 import { CoreAuthContextValue } from '../types';
 
-type MockedCoreAuthProviderProps<TUser> = React.PropsWithChildren<Partial<CoreAuthContextValue<TUser>>>;
+export type MockedCoreAuthProviderProps<TUser> = React.PropsWithChildren<Partial<CoreAuthContextValue<TUser>>>;
 
 export default function MockedCoreAuthProvider<TUser> ({
   dispatch = jest.fn(),
