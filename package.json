@@ -28,7 +28,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/react-native": "^7.1.0",
     "@types/graphql": "^14.5.0",
-    "@types/jest": "^26.0.19",
+    "@types/jest": "^27.0.0",
     "@types/react": "^17.0.0",
     "@types/react-native": "^0.64.4",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
