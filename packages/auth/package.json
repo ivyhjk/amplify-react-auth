@@ -18,11 +18,11 @@
     "url": "https://github.com/ivyhjk/amplify-react-auth/issues"
   },
   "peerDependencies": {
-    "aws-amplify": "^3.3.13",
-    "react": "^16.9.0 || ^17.0.1"
+    "aws-amplify": "^4.2.6",
+    "react": "^16.9.0 || ^17.0.2"
   },
   "dependencies": {
     "@ivyhjk/amplify-react-core-auth": "file:../core-auth",
-    "amazon-cognito-identity-js": "^4.5.6"
+    "amazon-cognito-identity-js": "^5.1.0"
   }
 }

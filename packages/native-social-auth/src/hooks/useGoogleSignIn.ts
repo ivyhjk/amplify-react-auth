@@ -51,7 +51,7 @@ export default function useGoogleSignIn <TUser extends FederatedUser = Federated
           user
         });
       } catch (error) {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        if ((error as { code: string }).code === statusCodes.SIGN_IN_CANCELLED) {
           dispatch({
             loading: false
           });
@@ -61,7 +61,7 @@ export default function useGoogleSignIn <TUser extends FederatedUser = Federated
       }
     } catch (error) {
       dispatch({
-        error,
+        error: error as Error,
         loading: false
       });
     }

@@ -39,7 +39,7 @@ export default function useGoogleSignOut<TUser extends FederatedUser = Federated
       });
     } catch (error) {
       dispatch({
-        error,
+        error: error as Error,
         loading: false
       });
     }

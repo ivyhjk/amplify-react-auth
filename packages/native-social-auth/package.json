@@ -18,9 +18,9 @@
     "url": "https://github.com/ivyhjk/amplify-react-auth/issues"
   },
   "peerDependencies": {
-    "aws-amplify": "^3.3.13",
-    "react": "^16.9.0 || ^17.0.1",
-    "react-native": "^0.63.4"
+    "aws-amplify": "^4.2.6",
+    "react": "^16.9.0 || ^17.0.2",
+    "react-native": "^0.65.1"
   },
   "dependencies": {
     "@ivyhjk/amplify-react-core-auth": "file:../core-auth",
