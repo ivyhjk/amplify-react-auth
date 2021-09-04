@@ -27,6 +27,7 @@
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "types": []
   }
 }
