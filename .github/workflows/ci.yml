@@ -55,7 +55,7 @@ jobs:
       - name: compile
         run: npm run compile
       - name: run linter
-        run: npm run lint
+        run: npm run lint -- --max-warnings=0
   tests:
     name: 'ci tests'
     needs: dependencies
