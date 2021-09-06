@@ -6,7 +6,7 @@ const config: Config.InitialOptions = {
   ...baseConfig,
   testEnvironment: 'node',
   setupFiles: [
-    '<rootDir>/src/__tests__/jest.setup.js'
+    '<rootDir>/src/__tests__/jest.setup.ts'
   ],
   preset: 'react-native',
   transform: {
