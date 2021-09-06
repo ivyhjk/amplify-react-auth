@@ -1,5 +1,5 @@
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Auth, Hub } from 'aws-amplify';
 import React from 'react';
 
@@ -69,7 +69,7 @@ describe('oauth.hooks.useFederatedSignIn', () => {
       </MockedOAuthProvider>
     );
 
-    await waitFor(jest.runAllTimers);
+    jest.runAllTimers();
 
     return statesSpy;
   }

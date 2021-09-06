@@ -36,7 +36,7 @@ describe('auth-provider.hooks.useSignOut', () => {
       </MockedAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(Auth.signOut).toBeCalledTimes(1);
     expect(Auth.signOut).toBeCalledWith({

@@ -4,6 +4,7 @@ import baseConfig from '../../jest.config.base';
 
 const config: Config.InitialOptions = {
   ...baseConfig,
+  testEnvironment: 'node',
   setupFiles: [
     '<rootDir>/src/__tests__/jest.setup.js'
   ],

@@ -23,7 +23,7 @@ describe('oauth.OAuthProvider', () => {
       </MockedOAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(rendered.getByText('Test')).toBeTruthy();
   });
@@ -54,7 +54,7 @@ describe('oauth.OAuthProvider', () => {
       </MockedOAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect.hasAssertions();
   });
@@ -66,7 +66,7 @@ describe('oauth.OAuthProvider', () => {
       <MockedOAuthProvider dispatch={stateSpy} />
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     return stateSpy;
   };
@@ -96,7 +96,7 @@ describe('oauth.OAuthProvider', () => {
         );
       });
 
-      await waitFor(jest.runOnlyPendingTimers);
+      await waitFor(jest.runAllTicks);
 
       expect(stateSpy).toBeCalledTimes(1);
       expect(stateSpy).toBeCalledWith({
@@ -127,7 +127,7 @@ describe('oauth.OAuthProvider', () => {
         );
       });
 
-      await waitFor(jest.runOnlyPendingTimers);
+      await waitFor(jest.runAllTicks);
 
       expect(stateSpy).toBeCalledTimes(1);
       expect(stateSpy).toBeCalledWith({

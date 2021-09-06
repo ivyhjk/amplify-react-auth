@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { act, render, waitFor } from '@testing-library/react';
 import { Auth } from 'aws-amplify';
 import React from 'react';
 
@@ -27,7 +27,7 @@ describe('core-auth.CoreAuthProvider', () => {
       </CoreAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(rendered.getByText('Test')).toBeTruthy();
   });
@@ -69,7 +69,7 @@ describe('core-auth.CoreAuthProvider', () => {
       </CoreAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(contextSpy).toBeCalledTimes(3);
     expect(contextSpy).toHaveBeenNthCalledWith(1, {

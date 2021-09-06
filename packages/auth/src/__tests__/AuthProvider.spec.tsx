@@ -22,7 +22,7 @@ describe('auth-provider.AuthProvider', () => {
       </AuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(rendered.getByText('Test')).toBeTruthy();
   });
@@ -46,7 +46,7 @@ describe('auth-provider.AuthProvider', () => {
       </AuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect.hasAssertions();
   });

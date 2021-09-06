@@ -34,7 +34,7 @@ describe('oauth.hooks.useUserPayload', () => {
       </MockedOAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(statesSpy).toBeCalledTimes(1);
     expect(statesSpy).toBeCalledWith({

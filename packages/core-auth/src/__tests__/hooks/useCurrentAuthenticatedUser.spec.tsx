@@ -26,7 +26,7 @@ describe('core-auth.hooks.useCurrentAuthenticatedUser', () => {
     // this hook doesn't require CoreAuthProvider, has their own state
     render(<App />);
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(statesSpy).toBeCalledTimes(2);
 

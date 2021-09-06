@@ -38,7 +38,7 @@ describe('auth-provider.hooks.useSignIn', () => {
       </MockedAuthProvider>
     );
 
-    await waitFor(jest.runOnlyPendingTimers);
+    await waitFor(jest.runAllTicks);
 
     expect(Auth.signIn).toBeCalledTimes(1);
     expect(Auth.signIn).toBeCalledWith({
