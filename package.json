@@ -22,7 +22,7 @@
     "@apollo/client": "^3.4.10",
     "@ivyhjk/eslint-config-typescript": "0.0.1-next.5",
     "@ivyhjk/eslint-config-typescript-react": "0.0.1-next.7",
-    "@jest/types": "^27.1.0",
+    "@jest/types": "^28.1.0",
     "@react-native-async-storage/async-storage": "^1.15.7",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/netinfo": "^8.2.0",
